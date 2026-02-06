@@ -6,7 +6,7 @@ A cozy top-down pixel village built with Vite + Phaser. Walk around, talk to NPC
 - Top-down movement
 - Clickable NPCs with dialogue
 - Custom procedural tileset (grass, paths, water, trees, bushes)
-- Decorative houses and a large castle
+- A large castle
 - Attack/arrow animations for show (no combat)
 
 ## Controls
