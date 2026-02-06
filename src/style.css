@@ -1,0 +1,137 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400;600&display=swap');
+
+:root {
+  font-family: 'Space Grotesk', 'Trebuchet MS', sans-serif;
+  color: #f8f3e6;
+  background-color: #0b1324;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --panel: rgba(10, 18, 34, 0.85);
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --accent: #ffcf5a;
+  --muted: rgba(248, 243, 230, 0.72);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image:
+    radial-gradient(circle at top, rgba(117, 187, 255, 0.15), transparent 45%),
+    radial-gradient(circle at 15% 60%, rgba(156, 255, 214, 0.08), transparent 40%),
+    linear-gradient(180deg, #0b1324 0%, #111c33 45%, #0b1324 100%);
+  padding: 18px;
+}
+
+#app {
+  width: min(1100px, 96vw);
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hud {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 18px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 18px 40px rgba(5, 9, 18, 0.45);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-family: 'Silkscreen', monospace;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.controls strong {
+  color: #fff1c1;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+#game {
+  width: min(960px, 96vw);
+  height: min(540px, 70vh);
+  border-radius: 18px;
+  border: 1px solid var(--panel-border);
+  background: #0a1524;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(6, 12, 24, 0.55);
+}
+
+#game canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.tips {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  padding: 4px 10px 0;
+}
+
+@media (max-width: 720px) {
+  body {
+    padding: 12px;
+  }
+
+  .hud {
+    padding: 14px 16px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .controls {
+    gap: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  #game {
+    height: min(520px, 70vh);
+  }
+}
