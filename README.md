@@ -19,7 +19,7 @@ A cozy top-down pixel village built with Vite + Phaser. Walk around, talk to NPC
 All visual assets are from itch.io packs:
 
 ```
-https://zerie.itch.io/tiny-rpg-character-asset-pack?download
+https://zerie.itch.io/tiny-rpg-character-asset-pack
 https://raou.itch.io/small-adventure
 ```
 
