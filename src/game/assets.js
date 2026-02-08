@@ -1,4 +1,6 @@
-﻿export const assetUrl = (path) => encodeURI(path);
+export const assetUrl = (path) => (
+  Array.isArray(path) ? path.map((entry) => encodeURI(entry)) : encodeURI(path)
+);
 
 export const ASSETS = {
   images: [
@@ -292,8 +294,12 @@ export const ASSETS = {
     },
   ],
   svgs: [{ key: 'vite-logo', url: '/vite.svg' }],
+  audio: [
+    { key: 'bgm', url: ['/audio/bgm.wav', '/audio/bgm.ogg'] },
+  ],
   binaries: [
     { key: 'aseprite-orc', url: '/Aseprite file/Orc.aseprite' },
     { key: 'aseprite-soldier', url: '/Aseprite file/Soldier.aseprite' },
   ],
 };
+

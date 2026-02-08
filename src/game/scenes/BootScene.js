@@ -22,6 +22,10 @@ export default class BootScene extends Phaser.Scene {
       this.load.svg(asset.key, assetUrl(asset.url));
     });
 
+    ASSETS.audio.forEach((asset) => {
+      this.load.audio(asset.key, assetUrl(asset.url));
+    });
+
     ASSETS.binaries.forEach((asset) => {
       this.load.binary(asset.key, assetUrl(asset.url));
     });

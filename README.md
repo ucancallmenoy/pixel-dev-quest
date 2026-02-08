@@ -8,6 +8,7 @@ A cozy top-down pixel village built with Vite + Phaser. Walk around, talk to NPC
 - Custom procedural tileset (grass, paths, water, trees, bushes)
 - Decorative houses and a large castle
 - Attack/arrow animations for show (no combat)
+- Background music with on/off toggle
 
 ## Controls
 - Move: `W/A/S/D` or `Arrow Keys`
@@ -30,6 +31,7 @@ pixel-rpg/
 │  ├─ Arrow(Projectile)/       # arrow sprites
 │  ├─ Aseprite file/           # Aseprite source files
 │  ├─ Characters(100x100)/     # Soldier/Orc sprite sheets and effects
+│  ├─ audio/                   # background music (add your own)
 │  └─ tilesets/                # NPC sprites and tileset art
 ├─ src/                        # application source
 │  ├─ game/                    # Phaser game code
@@ -51,3 +53,4 @@ pixel-rpg/
 npm install
 npm run dev
 ```
+

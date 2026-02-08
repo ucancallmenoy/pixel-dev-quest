@@ -30,6 +30,8 @@ export default class GameScene extends Phaser.Scene {
     this.isGameOver = false;
     this.waterIndexSet = new Set(TILE_SET.water);
     this.pathIndexSet = new Set(TILE_SET.path);
+    this.bgm = null;
+    this.musicEnabled = true;
   }
 
   create() {
@@ -58,6 +60,7 @@ export default class GameScene extends Phaser.Scene {
     this.createGameOverUi();
     this.createDialogueUi();
     this.bindDialogueHandlers();
+    this.setupMusic();
   }
 
   update(time) {
@@ -337,6 +340,17 @@ export default class GameScene extends Phaser.Scene {
     const castle = this.add.image(world.x, world.y + 24, 'castle-big');
     castle.setOrigin(0.5, 0);
     castle.setDepth(world.y + 30);
+
+    this.physics.add.existing(castle, true);
+    const castleBody = castle.body;
+    if (castleBody) {
+      const castleWidth = TILE_SIZE * 12;
+      const castleHeight = TILE_SIZE * 8;
+      castleBody.setSize(castleWidth, castleHeight);
+      castleBody.setOffset(-castleWidth / 2 + 80, 30);
+    }
+
+    this.castle = castle;
   }
 
   setupTileCollisions() {
@@ -513,6 +527,10 @@ export default class GameScene extends Phaser.Scene {
   setupColliders() {
     this.physics.add.collider(this.player, this.groundLayer);
     this.physics.add.collider(this.orc, this.groundLayer);
+    if (this.castle) {
+      this.physics.add.collider(this.player, this.castle);
+      this.physics.add.collider(this.orc, this.castle);
+    }
   }
 
   setupCombatHooks() {
@@ -602,5 +620,64 @@ export default class GameScene extends Phaser.Scene {
     this.dialogueTimer = this.time.delayedCall(1800, () => {
       if (this.dialogueText) this.dialogueText.setVisible(false);
     });
+  }
+
+  setupMusic() {
+    this.musicEnabled = this.readMusicPreference();
+    this.bgm = this.sound.add('bgm', {
+      loop: true,
+      volume: 0.35,
+    });
+
+    const tryPlay = () => {
+      if (!this.bgm || this.bgm.isPlaying || !this.musicEnabled) {
+        return;
+      }
+      this.bgm.play();
+    };
+
+    if (this.musicEnabled) {
+      if (this.sound.locked) {
+        this.sound.once(Phaser.Sound.Events.UNLOCKED, tryPlay);
+      }
+      tryPlay();
+    }
+
+    this.game.events.on('music:toggle', this.handleMusicToggle, this);
+
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.game.events.off('music:toggle', this.handleMusicToggle, this);
+      if (this.bgm) {
+        this.bgm.stop();
+        this.bgm.destroy();
+        this.bgm = null;
+      }
+    });
+  }
+
+  readMusicPreference() {
+    const stored = window.localStorage?.getItem('musicEnabled');
+    return stored !== 'false';
+  }
+
+  handleMusicToggle(enabled) {
+    this.musicEnabled = enabled;
+    if (!this.bgm) {
+      return;
+    }
+
+    if (enabled) {
+      if (this.sound.locked) {
+        this.sound.once(Phaser.Sound.Events.UNLOCKED, () => {
+          if (this.bgm && !this.bgm.isPlaying) {
+            this.bgm.play();
+          }
+        });
+      } else if (!this.bgm.isPlaying) {
+        this.bgm.play();
+      }
+    } else if (this.bgm.isPlaying) {
+      this.bgm.stop();
+    }
   }
 }
