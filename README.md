@@ -6,7 +6,7 @@ A cozy top-down pixel village built with Vite + Phaser. Walk around, talk to NPC
 - Top-down movement
 - Clickable NPCs with dialogue
 - Custom procedural tileset (grass, paths, water, trees, bushes)
-- Decorative houses and a large castle
+- A large castle
 - Attack/arrow animations for show (no combat)
 - Background music with on/off toggle
 
@@ -20,7 +20,7 @@ A cozy top-down pixel village built with Vite + Phaser. Walk around, talk to NPC
 All visual assets are from itch.io packs:
 
 ```
-https://zerie.itch.io/tiny-rpg-character-asset-pack?download
+https://zerie.itch.io/tiny-rpg-character-asset-pack
 https://raou.itch.io/small-adventure
 ```
 
